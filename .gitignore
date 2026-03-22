@@ -1,0 +1,216 @@
+# Python & Virtual Environments (2026 Standards)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Modern Python Package Managers
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.uv/
+.uv.lock
+
+# Virtual environments (alternative names)
+.env
+.venv.local
+venv.*
+
+# Poetry (legacy, but sometimes mixed with uv)
+poetry.lock
+Pipfile.lock
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+*.cover
+.coverage.json
+coverage.xml
+coverage/
+
+# Type Checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyright
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.env.local
+.env.*.local
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+*.tmproj
+*.tmproject
+.classpath
+*.iml
+*.iws
+*.ipr
+
+# Ruff & Linting
+.ruff_cache/
+
+# Pre-commit
+.pre-commit-config.yaml.bak
+
+# Build & Distribution
+build/
+dist/
+*.whl
+*.tar.gz
+*.zip
+*.egg-info/
+.build/
+
+# Documentation
+docs/_build/
+docs/.doctrees/
+site/
+.sphinx/
+htmlcov/
+
+# Jupyter & Notebooks
+.ipynb_checkpoints
+*.ipynb
+.jupyterlab*
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+secrets/
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+.aws/
+.gcp/
+
+# CI/CD & Deployment
+.github/workflows/*.log
+.gitlab-ci.yml.bak
+.gitignore.bak
+.docker/
+docker-compose.override.yml
+
+# Node.js (if using JavaScript tooling)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS-Specific Files
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Local Development
+local/
+tmp/
+temp/
+.vscode-settings.json
+launch.json
+
+# Application Specific (GitHub Audit Framework)
+reports/
+audit-results/
+*.json.local
+.github_token
+github_token
+reports/
+htmlcov/
+.uv.lock.local
+
+# Database & Data
+*.db
+*.sqlite
+*.sqlite3
+data/
+*.csv
+*.xlsx
+*.xls
+
+# Logs
+*.log
+logs/
+debug.log
+pip-log.txt
+npm-debug.log*
+
+# Temporary Files
+*.tmp
+*.bak
+*.backup
+*.cache
+.cache/
+temp/
+tmp/
+*.temp
+
+# Project Specific - DO NOT COMMIT
+config/.env
+config/secrets/
+config/local/
+.env.example.bak
+
+# Dependency Locks (uncomment if using pip freeze)
+# requirements-lock.txt
+# Keep uv.lock committed (reproducible builds)
+
+# Remote IDE Support
+.remote/
+
+# Python Environments
+site-packages/
+pip-delete-this-directory.txt
+
+# Keep these IMPORTANT files (use ! to override)
+!.gitkeep
+!.env.example
+!.github/
+!.github/workflows/
+!.github/workflows/*.yml
+!.github/workflows/*.yaml
