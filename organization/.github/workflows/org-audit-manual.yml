@@ -1,0 +1,67 @@
+name: Organization Audit - Manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      organization:
+        description: "Organization name to audit"
+        required: true
+        default: "VoodoOps"
+      generate_html:
+        description: "Generate HTML report"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Manual Organization Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: organization
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        working-directory: organization
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run audit
+        working-directory: organization
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m gh_audit audit ${{ github.event.inputs.organization }} \
+            --output reports/ \
+            ${{ github.event.inputs.generate_html == 'false' && '--no-html' || '' }}
+
+      - name: Upload audit reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: audit-reports-${{ github.event.inputs.organization }}
+          path: organization/reports/
+          retention-days: 90
+
+      - name: Generate summary
+        working-directory: organization
+        run: |
+          echo "## Audit Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -f "reports/*/executive-summary.txt" ]; then
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat reports/*/executive-summary.txt >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi

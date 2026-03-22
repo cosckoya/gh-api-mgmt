@@ -1,0 +1,56 @@
+# Security Policy
+
+Thank you for helping to keep VoodoOps secure!
+
+## Reporting Security Issues
+
+🚨 **DO NOT** open public GitHub issues for security vulnerabilities.
+
+Please report security vulnerabilities by emailing: **security@voodoops.com**
+
+Include the following information in your report:
+
+- Description of the vulnerability
+- Steps to reproduce
+- Potential impact
+- Any suggested fixes (optional)
+
+## Security Response Process
+
+We take security seriously and will:
+
+1. **Acknowledge receipt** within 48 hours
+2. **Investigate** and understand the issue within 7 days
+3. **Fix and test** the vulnerability
+4. **Release a patch** version with the fix
+5. **Publicly disclose** the vulnerability (if appropriate) with proper credit
+
+## Supported Versions
+
+Security updates are provided for:
+
+| Version | Status | Support Until |
+|---------|--------|---------------|
+| 1.x | Active | Current + 1 year |
+| 0.x | Unsupported | 2024-12-31 |
+
+## Security Best Practices
+
+When using VoodoOps:
+
+- Keep your version updated
+- Never commit secrets or sensitive data
+- Use strong authentication methods
+- Report any suspicious activity
+
+## Security Disclosure
+
+Once a security fix is released, we will:
+
+1. Publish a security advisory
+2. Credit the reporter (with permission)
+3. Provide migration guidance
+
+## Questions?
+
+For security-related questions, contact: security@voodoops.com

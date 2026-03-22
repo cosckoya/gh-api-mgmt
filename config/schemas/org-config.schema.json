@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Organization Configuration Schema",
+  "description": "Schema for GitHub organization security configurations",
+  "type": "object",
+  "required": ["scope", "organization"],
+  "properties": {
+    "scope": {
+      "type": "string",
+      "enum": ["org"],
+      "description": "Configuration scope (must be 'org' for organization config)"
+    },
+    "organization": {
+      "type": "string",
+      "description": "GitHub organization name",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "description": "Configuration description"
+    },
+    "two_factor_required": {
+      "type": "boolean",
+      "description": "Require 2FA for all organization members"
+    },
+    "default_member_permission": {
+      "type": "string",
+      "enum": ["pull", "push", "admin", "maintain", "triage"],
+      "description": "Default permission level for new members"
+    },
+    "members_can_create_repositories": {
+      "type": "boolean",
+      "description": "Allow members to create new repositories"
+    },
+    "members_can_create_internal_repositories": {
+      "type": "boolean",
+      "description": "Allow members to create internal repositories"
+    },
+    "members_can_create_private_repositories": {
+      "type": "boolean",
+      "description": "Allow members to create private repositories"
+    },
+    "members_can_create_public_repositories": {
+      "type": "boolean",
+      "description": "Allow members to create public repositories"
+    },
+    "members_can_fork_private_repositories": {
+      "type": "boolean",
+      "description": "Allow members to fork private repositories"
+    },
+    "web_commit_signoff_required": {
+      "type": "boolean",
+      "description": "Require signed commits via web UI"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,36 @@
+name: Dependency Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/dependency-review-action@v3
+        with:
+          fail-on-severity: moderate
+
+  dependabot:
+    name: Dependabot Configuration Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check dependabot.yml exists
+        run: |
+          if [ -f ".github/dependabot.yml" ]; then
+            echo "✓ dependabot.yml found"
+          else
+            echo "⚠ dependabot.yml not found - consider creating it"
+            exit 0
+          fi

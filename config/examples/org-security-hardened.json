@@ -1,0 +1,13 @@
+{
+  "scope": "org",
+  "organization": "VoodoOps",
+  "description": "Security-hardened organization configuration with strict policies",
+  "two_factor_required": true,
+  "default_member_permission": "pull",
+  "members_can_create_repositories": false,
+  "members_can_create_internal_repositories": false,
+  "members_can_create_private_repositories": false,
+  "members_can_create_public_repositories": false,
+  "members_can_fork_private_repositories": false,
+  "web_commit_signoff_required": true
+}

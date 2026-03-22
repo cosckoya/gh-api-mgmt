@@ -1,0 +1,195 @@
+{
+  "remediation_plan": {
+    "version": "1.0.0",
+    "timestamp": "2026-03-22T17:13:02Z",
+    "organization": "VoodoOps",
+    "description": "Recommended security improvements for VoodoOps organization",
+    "total_actions": 5,
+    "tier": "BASIC",
+    "actions": [
+      {
+        "id": "action-001",
+        "priority": 1,
+        "risk_level": "HIGH",
+        "type": "branch-protection",
+        "title": "Enable Branch Protection on Default Branch",
+        "description": "Enforce branch protection rules to prevent unreviewed changes",
+        "affected_repositories": ["aws-cdk", "Lab4PurpleSec"],
+        "implementation": {
+          "method": "github-api",
+          "endpoint": "/repos/{owner}/{repo}/rulesets",
+          "action": "create"
+        },
+        "configurations": {
+          "aws-cdk": {
+            "template": "production-repos.json",
+            "rationale": "Private production infrastructure code"
+          },
+          "Lab4PurpleSec": {
+            "template": "standard-repos.json",
+            "rationale": "Public educational/lab repository"
+          }
+        },
+        "estimated_time": "5 minutes",
+        "rollback": "Delete ruleset via API"
+      },
+      {
+        "id": "action-002",
+        "priority": 2,
+        "risk_level": "MEDIUM",
+        "type": "governance-file",
+        "title": "Add Dependabot Configuration",
+        "description": "Enable automated dependency updates and vulnerability alerts",
+        "affected_repositories": ["aws-cdk", "Lab4PurpleSec"],
+        "implementation": {
+          "method": "github-api",
+          "endpoint": "/repos/{owner}/{repo}/contents/.github/dependabot.yml",
+          "action": "create"
+        },
+        "file_content": {
+          "source": "templates/governance/dependabot.yml.template",
+          "path": ".github/dependabot.yml",
+          "description": "Automated dependency management"
+        },
+        "estimated_time": "2 minutes",
+        "rollback": "Delete file via API"
+      },
+      {
+        "id": "action-003",
+        "priority": 3,
+        "risk_level": "MEDIUM",
+        "type": "governance-file",
+        "title": "Add CODEOWNERS File",
+        "description": "Define code owners for automated review requirements",
+        "affected_repositories": ["aws-cdk"],
+        "implementation": {
+          "method": "github-api",
+          "endpoint": "/repos/{owner}/{repo}/contents/CODEOWNERS",
+          "action": "create"
+        },
+        "file_content": {
+          "source": "templates/governance/CODEOWNERS.template",
+          "path": "CODEOWNERS",
+          "customization": "Update with actual team members"
+        },
+        "estimated_time": "3 minutes",
+        "rollback": "Delete file via API"
+      },
+      {
+        "id": "action-004",
+        "priority": 4,
+        "risk_level": "MEDIUM",
+        "type": "governance-file",
+        "title": "Add Security Policy",
+        "description": "Define security vulnerability disclosure process",
+        "affected_repositories": ["aws-cdk", "Lab4PurpleSec"],
+        "implementation": {
+          "method": "github-api",
+          "endpoint": "/repos/{owner}/{repo}/contents/.github/SECURITY.md",
+          "action": "create"
+        },
+        "file_content": {
+          "source": "templates/governance/SECURITY.md.template",
+          "path": ".github/SECURITY.md",
+          "description": "Security policy and disclosure guidelines"
+        },
+        "estimated_time": "2 minutes",
+        "rollback": "Delete file via API"
+      },
+      {
+        "id": "action-005",
+        "priority": 5,
+        "risk_level": "MEDIUM",
+        "type": "workflow",
+        "title": "Add Security Scanning Workflows",
+        "description": "Implement automated security scanning in CI/CD pipeline",
+        "affected_repositories": ["aws-cdk", "Lab4PurpleSec"],
+        "implementation": {
+          "method": "github-api",
+          "endpoint": "/repos/{owner}/{repo}/contents/.github/workflows/{name}",
+          "action": "create"
+        },
+        "workflows": [
+          {
+            "name": "security-scan.yml",
+            "source": "templates/workflows/security-scan.yml",
+            "triggers": ["push", "pull_request"],
+            "description": "SAST, linting, type checking"
+          },
+          {
+            "name": "dependency-check.yml",
+            "source": "templates/workflows/dependency-check.yml",
+            "triggers": ["push", "pull_request"],
+            "description": "Dependency vulnerability scanning"
+          },
+          {
+            "name": "secret-scan.yml",
+            "source": "templates/workflows/secret-scan.yml",
+            "triggers": ["push", "pull_request"],
+            "description": "Secret detection (Gitleaks, TruffleHog)"
+          }
+        ],
+        "estimated_time": "5 minutes",
+        "rollback": "Delete workflow files via API"
+      }
+    ],
+    "manual_actions": [
+      {
+        "id": "manual-001",
+        "priority": 1,
+        "type": "organization-setting",
+        "title": "Enable Secret Scanning (Organization-wide)",
+        "description": "Enable secret scanning for public repositories",
+        "location": "GitHub Organization Settings > Code security and analysis",
+        "steps": [
+          "Go to https://github.com/organizations/VoodoOps/settings/security_analysis",
+          "Enable 'Secret scanning'",
+          "Enable 'Secret scanning push protection' (optional)"
+        ],
+        "benefits": [
+          "Automatic detection of exposed secrets",
+          "Prevention of accidental credential commits",
+          "Real-time alerts on public repos"
+        ]
+      },
+      {
+        "id": "manual-002",
+        "priority": 2,
+        "type": "organization-setting",
+        "title": "Enable 2FA Requirement",
+        "description": "Require two-factor authentication for all organization members",
+        "location": "GitHub Organization Settings > Member privileges",
+        "steps": [
+          "Go to https://github.com/organizations/VoodoOps/settings/member_privileges",
+          "Check 'Require two-factor authentication'",
+          "Click 'Save'"
+        ],
+        "impact": "All members must enable 2FA within 30 days",
+        "status": "Already enabled on VoodoOps"
+      }
+    ],
+    "post_remediation": {
+      "verification": [
+        "Run audit again to verify compliance score improvement",
+        "Check all workflows are running successfully",
+        "Validate branch protection is active"
+      ],
+      "expected_improvement": {
+        "current_score": 50.0,
+        "expected_score": 85.0,
+        "improvements": {
+          "branch_protection": "HIGH → RESOLVED",
+          "dependabot": "MEDIUM → RESOLVED (both repos)",
+          "governance": "Added CODEOWNERS + SECURITY.md",
+          "ci_cd": "Added 3 security workflows"
+        }
+      },
+      "maintenance": [
+        "Run audit monthly to track compliance",
+        "Review and update CODEOWNERS as team evolves",
+        "Monitor workflow execution in Actions tab",
+        "Update dependabot.yml as new dependencies are added"
+      ]
+    }
+  }
+}

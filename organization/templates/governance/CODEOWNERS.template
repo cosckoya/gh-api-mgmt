@@ -1,0 +1,24 @@
+# CODEOWNERS file - Defines code ownership and review requirements
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Security-critical paths - Require security team review
+/src/auth/ @devops @security
+/src/security/ @devops @security
+/.github/workflows/ @devops
+/infra/ @devops
+/docs/security/ @security
+
+# Infrastructure
+/terraform/ @devops
+/kubernetes/ @devops
+/docker/ @devops
+
+# Documentation
+/docs/ @*
+
+# CI/CD
+/.github/ @devops
+
+# Root files
+/pyproject.toml @devops
+/requirements*.txt @devops

@@ -1,0 +1,60 @@
+{
+  "scope": "repo",
+  "owner": "VoodoOps",
+  "repository": "aws-cdk",
+  "description": "Production repository configuration with comprehensive security",
+  "visibility": "private",
+  "branch_protection": {
+    "name": "production-protection",
+    "target": "branch",
+    "enforcement": "active",
+    "conditions": {
+      "ref_name": {
+        "include": ["main", "develop"],
+        "exclude": []
+      }
+    },
+    "rules": [
+      {
+        "type": "required_status_checks",
+        "parameters": {
+          "strict_required_status_checks_policy": true,
+          "required_status_checks": [
+            {
+              "context": "continuous-integration/my-ci-service"
+            }
+          ]
+        }
+      },
+      {
+        "type": "pull_request_reviews",
+        "parameters": {
+          "required_approving_review_count": 2,
+          "require_code_owner_reviews": true,
+          "require_last_push_approval": true,
+          "dismiss_stale_reviews": true
+        }
+      },
+      {
+        "type": "dismissal_restrictions"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".github/CODEOWNERS",
+      "content": "# Default owners\n* @owner-username\n\n# DevSecOps team owns security files\n.github/ @devops-team\nterraform/ @devops-team\n",
+      "message": "Add CODEOWNERS for governance"
+    },
+    {
+      "path": ".github/SECURITY.md",
+      "content": "# Security Policy\n\n## Reporting a Vulnerability\n\nPlease email security@voodoops.com with:\n- Description of the vulnerability\n- Steps to reproduce\n- Potential impact\n\n## Response Timeline\n\n- **Initial Response**: Within 24 hours\n- **Fix Release**: Within 7 days for critical issues\n- **Public Disclosure**: After fix is released\n",
+      "message": "Add SECURITY.md policy"
+    },
+    {
+      "path": "LICENSE",
+      "content": "MIT License\n\nCopyright (c) 2026 VoodoOps\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+      "message": "Add MIT License"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Member Configuration Schema",
+  "description": "Schema for GitHub member management configurations",
+  "type": "object",
+  "required": ["scope", "organization", "username"],
+  "properties": {
+    "scope": {
+      "type": "string",
+      "enum": ["member"],
+      "description": "Configuration scope (must be 'member' for member config)"
+    },
+    "organization": {
+      "type": "string",
+      "description": "GitHub organization name",
+      "minLength": 1
+    },
+    "username": {
+      "type": "string",
+      "description": "GitHub username",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "description": "Configuration description"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["member", "maintainer", "admin"],
+      "description": "Member role in organization"
+    },
+    "teams": {
+      "type": "array",
+      "description": "Teams to add member to",
+      "items": {
+        "type": "string",
+        "description": "Team slug"
+      }
+    },
+    "permissions": {
+      "type": "object",
+      "description": "Member permissions",
+      "properties": {
+        "admin": {
+          "type": "boolean",
+          "description": "Admin access"
+        },
+        "maintain": {
+          "type": "boolean",
+          "description": "Maintain access"
+        },
+        "push": {
+          "type": "boolean",
+          "description": "Push access"
+        },
+        "triage": {
+          "type": "boolean",
+          "description": "Triage access"
+        },
+        "pull": {
+          "type": "boolean",
+          "description": "Pull access"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

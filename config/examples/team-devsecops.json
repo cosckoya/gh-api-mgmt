@@ -1,0 +1,40 @@
+{
+  "scope": "team",
+  "organization": "VoodoOps",
+  "team_name": "DevSecOps",
+  "description": "DevSecOps team with infrastructure and security responsibilities",
+  "privacy": "closed",
+  "repositories": [
+    {
+      "name": "aws-cdk",
+      "permission": "admin"
+    },
+    {
+      "name": "terraform-config",
+      "permission": "admin"
+    },
+    {
+      "name": "security-policies",
+      "permission": "maintain"
+    },
+    {
+      "name": "Lab4PurpleSec",
+      "permission": "push"
+    }
+  ],
+  "members": [
+    {
+      "username": "alice",
+      "role": "maintainer"
+    },
+    {
+      "username": "bob",
+      "role": "member"
+    },
+    {
+      "username": "charlie",
+      "role": "member"
+    }
+  ],
+  "notification_setting": "notifications_enabled"
+}
